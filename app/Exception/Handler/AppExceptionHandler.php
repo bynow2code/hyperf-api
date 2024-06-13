@@ -28,7 +28,7 @@ class AppExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $errorMessage = sprintf('Internal Server Error[%s]: %s[%s] in %s', $throwable->getCode(), $throwable->getMessage(), $throwable->getLine(), $throwable->getFile());
+        $errorMessage = sprintf('Internal Server Error [%s]: %s[%s] in %s', $throwable->getCode(), $throwable->getMessage(), $throwable->getLine(), $throwable->getFile());
         $this->stopPropagation();
         return $this->error($errorMessage);
     }
