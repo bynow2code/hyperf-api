@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
-use App\Foundation\Traits\ApiJsonResponseTrait;
+use App\Foundation\Traits\ApiResponseTrait;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
-    use ApiJsonResponseTrait;
+    use ApiResponseTrait;
 
     public function __construct(protected StdoutLoggerInterface $logger)
     {
@@ -30,7 +30,7 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $errorMessage = sprintf('Internal Server Error [%s]: %s[%s] in %s', $throwable->getCode(), $throwable->getMessage(), $throwable->getLine(), $throwable->getFile());
         $this->stopPropagation();
-        return $this->error($errorMessage);
+        return $this->error($throwable->getCode(), $errorMessage,);
     }
 
     public function isValid(Throwable $throwable): bool

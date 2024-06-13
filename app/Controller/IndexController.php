@@ -13,18 +13,21 @@ declare(strict_types=1);
 namespace App\Controller;
 
 
+use App\Service\IndexService;
+use Hyperf\Di\Annotation\Inject;
+
 class IndexController extends AbstractController
 {
+    #[inject]
+    protected IndexService $indexService;
+
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
 
-        throw new \Exception('sklfdjklsjf',123);
-
-        return $this->success([
-            'method' => $method,
-            'message' => "Hello {$user}.",
-        ]);
+        $result = $this->indexService->index($user, $method);
+        
+        return $this->success($result);
     }
 }

@@ -8,7 +8,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Psr\Container\ContainerInterface;
 
-trait ApiJsonResponseTrait
+trait ApiResponseTrait
 {
     #[Inject]
     protected ContainerInterface $container;
@@ -21,18 +21,26 @@ trait ApiJsonResponseTrait
 
     protected function success(array $data = [], string $message = null, int $code = ErrorCode::SERVER_OK)
     {
+        if (is_null($message)) {
+            $message = ErrorCode::getMessage($code);
+        }
+
         return $this->response->json([
             'code' => $code,
-            'message' => $message ?? ErrorCode::getMessage($code),
+            'message' => $message,
             'data' => $data,
         ]);
     }
 
-    protected function error(string $message = null, $code = ErrorCode::SERVER_ERROR, array $data = [])
+    protected function error($code = ErrorCode::SERVER_ERROR, string $message = null, array $data = [])
     {
+        if (is_null($message)) {
+            $message = ErrorCode::getMessage($code);
+        }
+
         return $this->response->json([
             'code' => $code,
-            'message' => $message ?? ErrorCode::getMessage($code),
+            'message' => $message,
             'data' => $data,
         ]);
     }
