@@ -8,7 +8,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Psr\Container\ContainerInterface;
 
-trait ApiJsonTrait
+trait ApiJsonResponseTrait
 {
     #[Inject]
     protected ContainerInterface $container;

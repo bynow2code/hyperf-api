@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
+use App\Foundation\Traits\ApiJsonResponseTrait;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -20,6 +21,8 @@ use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
+    use ApiJsonResponseTrait;
+
     public function __construct(protected StdoutLoggerInterface $logger)
     {
     }
