@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Foundation\Traits\ApiJsonTrait;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -19,6 +20,8 @@ use Psr\Container\ContainerInterface;
 
 abstract class AbstractController
 {
+    use ApiJsonTrait;
+
     #[Inject]
     protected ContainerInterface $container;
 
